@@ -136,19 +136,23 @@ const App = () => {
     servercom
       .get()
       .then(response => {setPersons(response.data)})
+      .then(response => console.log(persons))
   }, [])
-
-  return (
-    <div>
-      <h2>Phonebook</h2>
-      <ErrorNotification error={error}></ErrorNotification>
-      <SuccessNotification message={notification}></SuccessNotification>
-      <Filter setNewFilter={setNewFilter} filterstring={filterstring}></Filter>
-      <PersonForm persons={persons} setPersons={setPersons} setNotification={setNotification} setError={setError}></PersonForm>
-      <h3>Numbers</h3>
-      <Persons persons={persons} filter={filterstring} handleDelete={handleDelete}></Persons>
-    </div>
-  )
+  if (persons.length > 1) {
+    console.log("yes" + persons.length)
+    console.log(persons)
+    return (
+      <div>
+        <h2>Phonebook</h2>
+        <ErrorNotification error={error}></ErrorNotification>
+        <SuccessNotification message={notification}></SuccessNotification>
+        <Filter setNewFilter={setNewFilter} filterstring={filterstring}></Filter>
+        <PersonForm persons={persons} setPersons={setPersons} setNotification={setNotification} setError={setError}></PersonForm>
+        <h3>Numbers</h3>
+        <Persons persons={persons} filter={filterstring} handleDelete={handleDelete}></Persons>
+      </div>
+    )
+  }
 }
 
 export default App
